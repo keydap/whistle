@@ -3,6 +3,10 @@
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" Android="0"/>
     </ContentPage.Padding>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Name="Edit" Order="Secondary"/>
+        <ToolbarItem  Name="About" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
     <StackLayout BackgroundColor="Gray" VerticalOptions="StartAndExpand" Orientation="Vertical">
         <Grid HorizontalOptions="Center" BackgroundColor="Teal">
             <Grid.RowDefinitions>
