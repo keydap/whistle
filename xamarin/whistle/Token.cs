@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using OtpNet;
+using System.Web;
+using System.Collections.Specialized;
 
 namespace whistle
 {
-    class Token
+    public class Token
     {
         private String id;
         private long createdAt;
         private String value;
         private String issuedBy; // organization
         private String issuedTo; // email address
+        private String appSrvUrl; // URL of the app server for notifications
         private Totp totp;
 
-        public Token(string value, string issuedBy, string issuedTo)
+        public Token(string value, string issuedBy, string issuedTo) : this(value, issuedBy, issuedTo, null)
+        {
+        }
+
+        public Token(string value, string issuedBy, string issuedTo, string appSrvUrl)
         {
             this.createdAt = DateTime.UtcNow.Ticks;
             this.value = value;
             this.issuedBy = issuedBy;
             this.issuedTo = issuedTo;
+            this.appSrvUrl = appSrvUrl;
 
             SHA256 sha = SHA256.Create();
             byte[] buf = sha.ComputeHash(Encoding.UTF8.GetBytes(value.ToCharArray()));
@@ -33,13 +41,13 @@ namespace whistle
             totp = new Totp(totpBytes, step: 30);
         }
 
-        string Id { get; }
+        public string Id { get; }
 
-        long CreatedAt { get; }
+        public long CreatedAt { get; }
 
-        string IssuedBy { get; }
+        public string IssuedBy { get; }
 
-        string IssuedTo { get; }
+        public string IssuedTo { get; }
 
         public string NextVal()
         {
@@ -68,6 +76,23 @@ namespace whistle
         public override int GetHashCode()
         {
             return 1877310944 + EqualityComparer<string>.Default.GetHashCode(id);
+        }
+
+        public static Token createFromTotpUrl(string totpUrl)
+        {
+            Token t = null;
+            try
+            {
+                Uri uri = new Uri(totpUrl);
+                uri.IsWellFormedOriginalString();
+                NameValueCollection nvc = HttpUtility.ParseQueryString(uri.Query);
+            }
+            catch(Exception e)
+            {
+                var x = e;
+                //Console.WriteLine(e.Message);
+            }
+            return t;
         }
     }
 }

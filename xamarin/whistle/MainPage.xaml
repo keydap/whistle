@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:whistle" x:Class="whistle.MainPage" BackgroundColor="Gray">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" Android="0"/>
+    </ContentPage.Padding>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Order="Secondary" Text="Edit"/>
+        <ToolbarItem  Order="Secondary" Text="About"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout BackgroundColor="Gray" VerticalOptions="StartAndExpand" Orientation="Vertical">
+        <Grid HorizontalOptions="Center" BackgroundColor="Teal">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="Accounts" HorizontalTextAlignment="End" FontSize="Large" FontAttributes="Bold"/>
+            <Button Grid.Row="0" Grid.Column="1" WidthRequest="45" Text="+" HorizontalOptions="End" FontSize="Large" BackgroundColor="Teal" Clicked="readFromQRCode"/>
+        </Grid>
+        <ScrollView HorizontalOptions="CenterAndExpand">
+            <StackLayout HorizontalOptions="CenterAndExpand">
+            </StackLayout>
+        </ScrollView>
+       <ScrollView HorizontalOptions="CenterAndExpand">
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <Grid HorizontalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="1" Text="K" HorizontalTextAlignment="Start" FontFamily="MarkerFelt-Thin, Bold, 32"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="x 043" HorizontalTextAlignment="Center" VerticalOptions="Center" ScaleY="2" ScaleX="2" FontFamily="MarkerFelt-Thin, Bold, 172"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="K" HorizontalTextAlignment="Start" VerticalOptions="End" FontFamily="MarkerFelt-Thin, Bold, 52"/>
+                    <Label Grid.Row="2" Grid.Column="2" Text="29s" HorizontalTextAlignment="Center" VerticalOptions="End" FontFamily="MarkerFelt-Thin, Bold, 32"/>
+                    <Switch Grid.Row="1" Grid.Column="0" VerticalOptions="Center" IsVisible="True"></Switch>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>
